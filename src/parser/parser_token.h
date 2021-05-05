@@ -23,23 +23,24 @@ const char* default_token_validator(token t) {
 class parser_token : public parser {
 
 public:
-    ast*        (*createfunc)(token) = &default_asttoken_createfunc;
-    const char* (*validator) (token) = &default_token_validator;
+    function<ast* (token)>        createfunc = [](token t) {return new ast_token(t);};
+    function<const char* (token)> validator  = [](token t) {return nullptr;};
 
     vector<ast*> read(lexer* lexer) override {
         token t = lexer->next();
-        const char* err = (*validator)(t);
-        if (err)
-            throw std::runtime_error(strstr("Bad token: ", err));
-
-        ast* r = (*createfunc)(t);
+        const char* err = validator(t);
+        if (err) {
+            cout << "Bad token: " << err << endl;
+            exit(-1);
+        }
+        ast* r = createfunc(t);
         vector<ast*> l(1, r);
         return l;
     }
 
     bool match(lexer* lexer) override {
         token t = lexer->peek();
-        const char* err = (*validator)(t);
+        const char* err = validator(t);
         return err == nullptr;
     }
 

@@ -60,21 +60,35 @@ public:
         m_components.push_back(psr);
     }
 
-    static ast* comp_asttoken_createfunc_number(token t) {
+
+//    static ast* comp_asttoken_createfunc_number(token t) {
+//        return new ast_token(t);
+//    }
+    static const char* comp_token_validator_number(token t) {
 
     }
-    static const char* comp_token_validator_number(token t) {
-        if (t.m_type != token::TOKEN_NUMBER)
-            return "Required Number Type.";
-        return nullptr;
-    }
-    void add_number() {
-        parser_token* p = new parser_token();
+    void comp_number() {
+        auto* p = new parser_token();
 //        p->createfunc = &comp_asttoken_createfunc_number;
-        p->validator  = &comp_token_validator_number;
+        p->validator = [](token t) -> const char* {
+            if (t.m_type != token::TOKEN_NUMBER)
+                return "Required Number Type.";
+            return nullptr;
+        };
         add_component(p);
     }
 
+    void comp_id(const string& id) {
+        auto* p = new parser_token();
+        p->validator = [id](const token& t) -> const char* {
+            if (t.m_type != token::TOKEN_IDENTIFIER)
+                return "Required Identifier Type.";
+            if (t.m_text != id)
+                return "Bad id. not as expected.";
+            return nullptr;
+        };
+        add_component(p);
+    }
 };
 
 
