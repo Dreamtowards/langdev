@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="langdev"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="langdev">
+				<Option output="/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/langdev" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 langdev"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="langdev/fast">
+				<Option output="/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/langdev" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 langdev/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.cpp">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/lexer/token.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/main.cpp">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_token.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parserls.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/util/ioutil.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
