@@ -34,6 +34,12 @@ public:
         return m_tokens.at(m_index);
     }
 
+    void dbg_print_tokens() {
+        for (const token& t : m_tokens) {
+            cout <<"TOKEN["<<t.m_type<<"]: "<< t.m_text << endl;
+        }
+    }
+
 };
 
 

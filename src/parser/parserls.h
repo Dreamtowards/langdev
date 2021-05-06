@@ -61,30 +61,43 @@ public:
     }
 
 
-//    static ast* comp_asttoken_createfunc_number(token t) {
-//        return new ast_token(t);
-//    }
-    static const char* comp_token_validator_number(token t) {
-
-    }
-    void comp_number() {
+    void c_number() {
         auto* p = new parser_token();
-//        p->createfunc = &comp_asttoken_createfunc_number;
-        p->validator = [](token t) -> const char* {
-            if (t.m_type != token::TOKEN_NUMBER)
+        p->validator = [](const token& t) -> const char* {
+            if (!t.isNumber())
                 return "Required Number Type.";
             return nullptr;
         };
         add_component(p);
     }
 
-    void comp_id(const string& id) {
+    void c_id(const string& id) {
         auto* p = new parser_token();
         p->validator = [id](const token& t) -> const char* {
-            if (t.m_type != token::TOKEN_IDENTIFIER)
+            if (!t.isIdentifier())
                 return "Required Identifier Type.";
             if (t.m_text != id)
                 return "Bad id. not as expected.";
+            return nullptr;
+        };
+        add_component(p);
+    }
+
+    void c_string() {
+        auto* p = new parser_token();
+        p->validator = [](token t) -> const char* {
+            if (!t.isString())
+                return "Required String Type.";
+            return nullptr;
+        };
+        add_component(p);
+    }
+
+    void c_name() {
+        auto* p = new parser_token();
+        p->validator = [](token t) -> const char* {
+            if (!t.isName())
+                return "Required Name Type.";
             return nullptr;
         };
         add_component(p);

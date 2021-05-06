@@ -124,16 +124,16 @@ void lexer::read(string s) {
             continue;
         } else if (isNumber(ch)) {                // NUMBER
             text = readNumber(s, &idx);
-            type = token::TOKEN_NUMBER;
+            type = token::TYPE_NUMBER;
         } else if (ch == '"' || ch == '\'') {     // STRING
             text = readQuote(s, &idx);
-            type = token::TOKEN_STRING;
+            type = token::TYPE_STRING;
         } else if (isName(ch, true)) {      // NAME
             text = readName(s, &idx);
-            type = token::TOKEN_IDENTIFIER;
+            type = token::TYPE_NAME;
         } else if (isBorder(ch)) {               // BORDER
             text = readBorder(s, &idx);
-            type = token::TOKEN_IDENTIFIER;
+            type = token::TYPE_BORDER;
         } else {
             throw std::runtime_error("Unsupported token format.");
         }

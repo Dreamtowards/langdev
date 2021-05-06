@@ -14,6 +14,18 @@ ast.h
 ../lexer/token.h
 /Users/dreamtowards/CLionProjects/langdev/src/lexer/token.h
 
+/Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.cpp
+string
+-
+vector
+-
+sstream
+-
+token.h
+/Users/dreamtowards/CLionProjects/langdev/src/lexer/token.h
+lexer.h
+/Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h
+
 /Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h
 string
 -

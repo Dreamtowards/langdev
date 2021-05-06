@@ -12,15 +12,34 @@ using namespace std;
 class token {
 
 public:
-    static const int TOKEN_IDENTIFIER = 1;   // BORDER NAME
-    static const int TOKEN_NUMBER = 2;       // INT FLOAT   HEX OCT BIN.?
-    static const int TOKEN_STRING = 3;       // STRING CHAR.?
+    static const int TYPE_NAME = 1;    // NAME IDENTIFIER
+    static const int TYPE_BORDER = 2;  // BORDER IDENTIFIER
+    static const int TYPE_NUMBER = 3;  // INT FLOAT   HEX OCT BIN.?
+    static const int TYPE_STRING = 4;  // STRING CHAR.?
 
     string m_text;
     int m_type;
 
 public:
     token(string textIn, int typeIn): m_text(textIn), m_type(typeIn) {};
+
+    bool isName() const {
+        return m_type == TYPE_NAME;
+    }
+    bool isBorder() const {
+        return m_type == TYPE_BORDER;
+    }
+    bool isIdentifier() const {
+        return isName() || isBorder();
+    }
+    bool isNumber() const {
+        return m_type == TYPE_NUMBER;
+    }
+    bool isString() const {
+        return m_type == TYPE_STRING;
+    }
+
+
 
     string to_string() {
         return m_text;
