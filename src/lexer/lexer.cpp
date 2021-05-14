@@ -110,14 +110,15 @@ static string readBorder(string s, int* idx) {
 
 
 void lexer::read(string s) {
+    int len = s.length();
     int idx = 0;
-    while (skipBlanks(s, &idx) < s.length()) {
+    while (skipBlanks(s, &idx) < len) {
         char ch = s.at(idx);
         string text;
         int type;
         if (_curris("//",s,idx)) {         // COMMENT line
             int end = s.find('\n', idx);
-            idx = end == -1 ? s.length() : end;
+            idx = end == -1 ? len : end;
             continue;
         } else if (_curris("/*",s,idx)) {  // COMMENT block
             idx = s.find("*/",idx) +2;
@@ -138,6 +139,6 @@ void lexer::read(string s) {
             throw std::runtime_error("Unsupported token format.");
         }
 
-        m_tokens.emplace_back(text, type);
+        m_tokens.push_back(new token(text, type));
     }
 }

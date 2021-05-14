@@ -8,23 +8,17 @@
 
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
 
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr.h
+ast.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
+ast_token.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h
+
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h
 ast.h
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
 ../lexer/token.h
 /Users/dreamtowards/CLionProjects/langdev/src/lexer/token.h
-
-/Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.cpp
-string
--
-vector
--
-sstream
--
-token.h
-/Users/dreamtowards/CLionProjects/langdev/src/lexer/token.h
-lexer.h
-/Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h
 
 /Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h
 string
@@ -47,10 +41,12 @@ fstream
 -
 lexer/lexer.h
 /Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h
-util/ioutil.h
-/Users/dreamtowards/CLionProjects/langdev/src/util/ioutil.h
+util/util.h
+/Users/dreamtowards/CLionProjects/langdev/src/util/util.h
 parser/parserls.h
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parserls.h
+parser/parser_expr.h
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_expr.h
 
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h
 vector
@@ -59,6 +55,22 @@ vector
 /Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h
 ../ast/ast.h
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
+
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_expr.h
+map
+-
+parser.h
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h
+../ast/ast_expr.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr.h
+
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_lookahead_tag.h
+parser.h
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h
+
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_or.h
+parser.h
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h
 
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parser_token.h
 ../lexer/token.h
@@ -81,8 +93,12 @@ parser.h
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h
 parser_token.h
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parser_token.h
+parser_or.h
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_or.h
+parser_lookahead_tag.h
+/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_lookahead_tag.h
 
-/Users/dreamtowards/CLionProjects/langdev/src/util/ioutil.h
+/Users/dreamtowards/CLionProjects/langdev/src/util/util.h
 string
 -
 sstream

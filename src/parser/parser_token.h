@@ -12,22 +12,22 @@
 
 using namespace std;
 
-ast* default_asttoken_createfunc(token t) {
-    return new ast_token(t);
-}
-const char* default_token_validator(token t) {
-    return nullptr;
-}
+//ast* default_asttoken_createfunc(token* t) {
+//    return new ast_token(t);
+//}
+//const char* default_token_validator(token t) {
+//    return nullptr;
+//}
 
 
 class parser_token : public parser {
 
 public:
-    function<ast* (token)>        createfunc = [](token t) {return new ast_token(t);};
-    function<const char* (token)> validator  = [](token t) {return nullptr;};
+    function<ast* (token*)>        createfunc = [](token* t) {return new ast_token(t);};
+    function<const char* (token*)> validator  = [](token* t) {return nullptr;};
 
     vector<ast*> read(lexer* lexer) override {
-        token t = lexer->next();
+        token* t = lexer->next();
         const char* err = validator(t);
         if (err) {
             cout << "Bad token: " << err << endl;
@@ -38,8 +38,8 @@ public:
         return l;
     }
 
-    bool match(lexer* lexer) override {
-        token t = lexer->peek();
+    bool match(lexer* lex) override {
+        token* t = lex->peek();
         const char* err = validator(t);
         return err == nullptr;
     }

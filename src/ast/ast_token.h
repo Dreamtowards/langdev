@@ -11,12 +11,12 @@
 class ast_token : public ast {
 
 public:
-    token m_token;
+    token* m_token;
 
-    ast_token(token tIn) : m_token(tIn) {};
+    ast_token(token* tIn) : m_token(tIn) {};
 
     string to_string() override {
-        return "ast_token{"+m_token.to_string()+"}";
+        return "ast_token{"+m_token->to_string()+"}";
     }
 
 };

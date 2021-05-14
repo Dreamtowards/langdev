@@ -16,9 +16,22 @@ class parser {
 
 public:
 
-    virtual vector<ast*> read(lexer* lexer) = 0;
+    virtual vector<ast*> read(lexer* lex) = 0;
 
-    virtual bool match(lexer* lexer) = 0;
+    /**
+     * directly pass the only-one result out.
+     * used in e.g. parserls non-ast-createfunc directly pass and parser_expr pass factor-pass/expr-ast.
+     */
+    ast* readone(lexer* lex) {
+        vector<ast*> ls = read(lex);
+        assert(ls.size() == 1);
+        return ls.at(0);
+    }
+
+    /**
+     * After call of match(), the lexer-index should as same as before the call.
+     */
+    virtual bool match(lexer* lex) = 0;
 
 };
 

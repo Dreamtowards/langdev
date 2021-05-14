@@ -18,7 +18,7 @@ class lexer {
 
 public:
     int m_index;
-    vector<token> m_tokens;
+    vector<token*> m_tokens;
 
     ~lexer() {
         std::cout << "Deconstruct lexer" << std::endl;
@@ -26,17 +26,19 @@ public:
 
     void read(string s);
 
-    token next() {
+    token* next() {
         return m_tokens.at(m_index++);
     }
 
-    token peek() {
+    token* peek() {
+        if (m_index == m_tokens.size())
+            return nullptr;
         return m_tokens.at(m_index);
     }
 
     void dbg_print_tokens() {
-        for (const token& t : m_tokens) {
-            cout <<"TOKEN["<<t.m_type<<"]: "<< t.m_text << endl;
+        for (const token* t : m_tokens) {
+            cout <<"TOKEN["<<t->m_type<<"]: "<< t->m_text << endl;
         }
     }
 

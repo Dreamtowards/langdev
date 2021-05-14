@@ -83,6 +83,9 @@
 		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h">
 			<Option target="langdev"/>
 		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr.h">
+			<Option target="langdev"/>
+		</Unit>
 		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h">
 			<Option target="langdev"/>
 		</Unit>
@@ -101,13 +104,22 @@
 		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h">
 			<Option target="langdev"/>
 		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_expr.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_lookahead_tag.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_or.h">
+			<Option target="langdev"/>
+		</Unit>
 		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parser_token.h">
 			<Option target="langdev"/>
 		</Unit>
 		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/parser/parserls.h">
 			<Option target="langdev"/>
 		</Unit>
-		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/util/ioutil.h">
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/util/util.h">
 			<Option target="langdev"/>
 		</Unit>
 		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/CMakeLists.txt">

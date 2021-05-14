@@ -6,12 +6,16 @@ CMakeFiles/langdev.dir/src/lexer/lexer.cpp.o: ../src/lexer/lexer.h
 CMakeFiles/langdev.dir/src/lexer/lexer.cpp.o: ../src/lexer/token.h
 
 CMakeFiles/langdev.dir/src/main.cpp.o: ../src/ast/ast.h
+CMakeFiles/langdev.dir/src/main.cpp.o: ../src/ast/ast_expr.h
 CMakeFiles/langdev.dir/src/main.cpp.o: ../src/ast/ast_token.h
 CMakeFiles/langdev.dir/src/main.cpp.o: ../src/lexer/lexer.h
 CMakeFiles/langdev.dir/src/main.cpp.o: ../src/lexer/token.h
 CMakeFiles/langdev.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/langdev.dir/src/main.cpp.o: ../src/parser/parser.h
+CMakeFiles/langdev.dir/src/main.cpp.o: ../src/parser/parser_expr.h
+CMakeFiles/langdev.dir/src/main.cpp.o: ../src/parser/parser_lookahead_tag.h
+CMakeFiles/langdev.dir/src/main.cpp.o: ../src/parser/parser_or.h
 CMakeFiles/langdev.dir/src/main.cpp.o: ../src/parser/parser_token.h
 CMakeFiles/langdev.dir/src/main.cpp.o: ../src/parser/parserls.h
-CMakeFiles/langdev.dir/src/main.cpp.o: ../src/util/ioutil.h
+CMakeFiles/langdev.dir/src/main.cpp.o: ../src/util/util.h
 
