@@ -28,9 +28,9 @@ public:
     static void init_operators() {
         operators["="] = new operator_(1, ASS_RIGHT);
         operators["+"] = new operator_(2, ASS_LEFT);
-//        operator_::operators["-"] = new operator_(2, ASS_LEFT);
-//        operator_::operators["*"] = new operator_(3, ASS_LEFT);
-//        operator_::operators["/"] = new operator_(3, ASS_LEFT);
+        operators["-"] = new operator_(2, ASS_LEFT);
+        operators["*"] = new operator_(3, ASS_LEFT);
+        operators["/"] = new operator_(3, ASS_LEFT);
     }
 };
 map<string, operator_*> operator_::operators ;
@@ -56,17 +56,15 @@ public:
         token* opr = lex->next();
         ast* right = m_factor->readone(lex);
         operator_* next;
-        while ((next=next_operator(lex)) != nullptr && is_right_higher_precedence(prec, next)) {  // a = (b * c) + e   a + b + c
+        while ((next=next_operator(lex)) != nullptr && is_right_higher_precedence(prec, next)) {
             right = read_right_side(lex, right, next->precedence);
-            std::cout << "Ret" << endl;
         }
         return new ast_expr(left, opr, right);
     }
 
     static operator_* next_operator(lexer* lex) {
         token* t = lex->peek();
-        if (!t)
-            return nullptr;
+        if (!t) return nullptr;
         auto e = operator_::operators.find(t->m_text);
         if (e != operator_::operators.end()) {
             return e->second;

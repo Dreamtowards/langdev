@@ -95,6 +95,7 @@ public:
                 return "Bad id. not as expected.";
             return nullptr;
         };
+        p->createfunc = nullptr;  // Do not needs ast-result.
         return add_component(p);
     }
 
@@ -119,10 +120,21 @@ public:
     }
 
 
-    parserls* c_or(vector<parser*>& v) {
+    parserls* c_or(const vector<parser*>& v) {
         auto* p = new parser_or(v);
         return add_component(p);
     }
+    parserls* c_or(int num, ...) {
+        va_list va_ls;
+        va_start(va_ls, num);
+        vector<parser*> v;
+        for (int i = 0;i < num;i++) {
+            v.push_back(va_arg(va_ls, parser*));
+        }
+        va_end(va_ls);
+        return c_or(v);  // really add.
+    }
+
 
     parserls* mark_lookahead() {
         m_use_lookahead = true;

@@ -23,7 +23,7 @@ using namespace std;
 class parser_token : public parser {
 
 public:
-    function<ast* (token*)>        createfunc = [](token* t) {return new ast_token(t);};
+    function<ast* (token*)>        createfunc = [](token* t) {return new ast_token(t);};  // nullable. null: ignore ast-result.
     function<const char* (token*)> validator  = [](token* t) {return nullptr;};
 
     vector<ast*> read(lexer* lexer) override {
@@ -33,9 +33,13 @@ public:
             cout << "Bad token: " << err << endl;
             exit(-1);
         }
-        ast* r = createfunc(t);
-        vector<ast*> l(1, r);
-        return l;
+        if (createfunc == nullptr) {
+            return {};
+        } else {
+            ast *r = createfunc(t);
+            vector<ast *> l(1, r);
+            return l;
+        }
     }
 
     bool match(lexer* lex) override {

@@ -12,7 +12,7 @@ class parser_or : public parser {
 public:
     vector<parser*> m_options;
 
-    parser_or(vector<parser*>& v) : m_options(v) { }
+    parser_or(const vector<parser*>& v) : m_options(v) { }
 
     vector<ast*> read(lexer* lex) override {
         parser* p = choose(lex);

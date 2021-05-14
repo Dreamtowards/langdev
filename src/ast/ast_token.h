@@ -16,7 +16,7 @@ public:
     ast_token(token* tIn) : m_token(tIn) {};
 
     string to_string() override {
-        return "ast_token{"+m_token->to_string()+"}";
+        return "'"+m_token->to_string()+"'";
     }
 
 };
