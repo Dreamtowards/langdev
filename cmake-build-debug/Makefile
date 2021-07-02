@@ -143,33 +143,6 @@ langdev/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/langdev.dir/build.make CMakeFiles/langdev.dir/build
 .PHONY : langdev/fast
 
-src/lexer/lexer.o: src/lexer/lexer.cpp.o
-
-.PHONY : src/lexer/lexer.o
-
-# target to build an object file
-src/lexer/lexer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/langdev.dir/build.make CMakeFiles/langdev.dir/src/lexer/lexer.cpp.o
-.PHONY : src/lexer/lexer.cpp.o
-
-src/lexer/lexer.i: src/lexer/lexer.cpp.i
-
-.PHONY : src/lexer/lexer.i
-
-# target to preprocess a source file
-src/lexer/lexer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/langdev.dir/build.make CMakeFiles/langdev.dir/src/lexer/lexer.cpp.i
-.PHONY : src/lexer/lexer.cpp.i
-
-src/lexer/lexer.s: src/lexer/lexer.cpp.s
-
-.PHONY : src/lexer/lexer.s
-
-# target to generate assembly for a file
-src/lexer/lexer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/langdev.dir/build.make CMakeFiles/langdev.dir/src/lexer/lexer.cpp.s
-.PHONY : src/lexer/lexer.cpp.s
-
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -206,9 +179,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... langdev"
-	@echo "... src/lexer/lexer.o"
-	@echo "... src/lexer/lexer.i"
-	@echo "... src/lexer/lexer.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

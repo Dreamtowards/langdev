@@ -15,7 +15,12 @@
 #include "parser_token.h"
 #include "parser_or.h"
 #include "parser_lookahead_tag.h"
+#include "parser_repeat.h"
+#include "parser_composer.h"
+#include "../ast/ast_expr.h"
 
+class parserls;
+parserls* pass();
 
 class parserls : public parser {
 
@@ -30,38 +35,40 @@ public:
      */
     function<ast*(vector<ast*>)> m_createfunc = nullptr;
 
-    vector<ast*> read(lexer* lexer) override {
-        vector<ast*> ls;
+    void read(lexer* lexer, std::vector<ast*>& out) override {
+        // organize struct or simply pass.
+        std::vector<ast*> _struc;
+        std::vector<ast*>& ls = m_createfunc ? _struc : out;
+
         for (parser* p : m_components) {
-            vector<ast*> rs = p->read(lexer);
-            ls.insert(ls.end(), rs.begin(), rs.end());
+            p->read(lexer, ls);
         }
-        if (m_createfunc != nullptr) {
+        if (m_createfunc) {
             // create AST.
             ast* r = m_createfunc(ls);
-            vector<ast*> wr(1, r);
-            return wr;
-        } else {
-            // pass through.
-            return ls;
+            out.push_back(r);
         }
     }
 
     bool match(lexer* lex) override {
+        // empty parserls should be pass.
+        // case: ornull.  pass().and(sth).or(suffix1, suffix2, pass() /*empty, no suffix.*/)
         if (m_components.empty())
-            return true;  // empty is allowed. (as want to create an empty AST.
+            return true;
+        // as lookahead-until does not needed, just test the first one.
         if (!m_use_lookahead)
-            return m_components.at(0)->match(lex);  // as lookahead doesnt needed, just test the first.
+            return m_components.at(0)->match(lex);
 
         // lookahead until
         int mark = lex->m_index;
         bool pass = true;
+        std::vector<ast*> tmpls;
         for (parser* p : m_components) {
             if (p == parser_lookahead_tag::instance())
                 break;
             try {
-                p->read(lex);
-            } catch (runtime_error& ex) {
+                p->read(lex, tmpls);
+            } catch (std::runtime_error& ex) {
                 pass = false;
                 break;
             }
@@ -70,23 +77,41 @@ public:
         return pass;
     }
 
-    parserls* add_component(parser* p) {
+    parserls* andp(parser* p) {
         m_components.push_back(p);
         return this;
     }
 
 
-    parserls* c_number() {
+    parserls* number() {
         auto* p = new parser_token();
         p->validator = [](token* t) -> const char* {
             if (!t->isNumber())
                 return "Required Number Type.";
             return nullptr;
         };
-        return add_component(p);
+        return andp(p);
+    }
+    parserls* string() {
+        auto* p = new parser_token();
+        p->validator = [](token* t) -> const char* {
+            if (!t->isString())
+                return "Required String Type.";
+            return nullptr;
+        };
+        return andp(p);
+    }
+    parserls* name() {
+        auto* p = new parser_token();
+        p->validator = [](token* t) -> const char* {
+            if (!t->isName())
+                return "Required Name Type.";
+            return nullptr;
+        };
+        return andp(p);
     }
 
-    parserls* c_id(const string& id) {
+    parserls* id(const std::string& id) {
         auto* p = new parser_token();
         p->validator = [id](token* t) -> const char* {
             if (!t->isIdentifier())
@@ -96,61 +121,101 @@ public:
             return nullptr;
         };
         p->createfunc = nullptr;  // Do not needs ast-result.
-        return add_component(p);
+        return andp(p);
     }
-
-    parserls* c_string() {
+    parserls* iden(const vector<std::string>& ids) {
         auto* p = new parser_token();
-        p->validator = [](token* t) -> const char* {
-            if (!t->isString())
-                return "Required String Type.";
+        p->validator = [ids](token* t) -> const char* {
+            if (!t->isIdentifier())
+                return "Required Identifier Type.";
+            if (find(ids.begin(), ids.end(), t->m_text) == ids.end())
+                return "Bad id. not as expects.";
             return nullptr;
         };
-        return add_component(p);
+        return andp(p);
     }
-
-    parserls* c_name() {
-        auto* p = new parser_token();
-        p->validator = [](token* t) -> const char* {
-            if (!t->isName())
-                return "Required Name Type.";
-            return nullptr;
-        };
-        return add_component(p);
+    parserls* iden(std::initializer_list<std::string> l) {
+        return iden(std::vector<std::string>(l));
     }
 
 
-    parserls* c_or(const vector<parser*>& v) {
+
+
+    parserls* or_p(const std::vector<parser*>& v) {
         auto* p = new parser_or(v);
-        return add_component(p);
+        return andp(p);
     }
-    parserls* c_or(int num, ...) {
-        va_list va_ls;
-        va_start(va_ls, num);
-        vector<parser*> v;
-        for (int i = 0;i < num;i++) {
-            v.push_back(va_arg(va_ls, parser*));
-        }
-        va_end(va_ls);
-        return c_or(v);  // really add.
+
+    parserls* or_p(const std::initializer_list<parser*>& ls) {
+        return or_p(std::vector<parser*>(ls));
     }
 
 
     parserls* mark_lookahead() {
         m_use_lookahead = true;
-        return add_component(parser_lookahead_tag::instance());
+        return andp(parser_lookahead_tag::instance());
     }
+
+    parserls* repeat(parser* parser) {
+        auto* p = new parser_repeat();
+        p->m_parser = parser;
+        return andp(p);
+    }
+    parserls* op(parser* parser) {
+        auto* p = new parser_repeat();
+        p->m_parser = parser;
+        p->m_max_one = true;
+        return andp(p);
+    }
+
+
+
+    parserls* composer(const function<void(std::vector<ast*>&)>& compfunc) {
+        auto* p = new parser_composer();
+
+        p->m_composer_func = compfunc;
+
+        return andp(p);
+    }
+    // compose stack tops
+    template<typename T>
+    parserls* composesp(int n) {
+        return composer([n](std::vector<ast*>& ls){
+            vector<ast*> l;
+            l.reserve(n);
+
+            // move.
+            l.insert(l.begin(), ls.end()-n, ls.end());
+            ls.erase(ls.end()-n, ls.end());
+
+            ast* r = new T(l);
+            ls.push_back(r);
+        });
+    }
+
+
+
+    parserls* _expr_bi_lr(parser* factor, std::initializer_list<std::string> oprs) {
+        return andp(factor)->repeat(pass()->iden(oprs)->andp(factor)->composesp<ast_expr>(3));
+    }
+
+
+
+
+
 };
 
 parserls* pass() {
     return new parserls();
 }
-parserls* struc(function<ast*(vector<ast*>)>& createfunc) {
+
+template<typename T>
+parserls* struc() {
     auto* p = new parserls();
-    p->m_createfunc = createfunc;
+    p->m_createfunc = [](const vector<ast*>& ls) -> ast* {
+        return new T(ls);
+    };
     return p;
 }
-
-
 
 #endif //LANGDEV_PARSERLS_H

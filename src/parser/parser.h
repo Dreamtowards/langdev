@@ -10,20 +10,19 @@
 #include "../lexer/lexer.h"
 #include "../ast/ast.h"
 
-using namespace std;
-
 class parser {
 
 public:
 
-    virtual vector<ast*> read(lexer* lex) = 0;
+    virtual void read(lexer* lex, std::vector<ast*>& out) = 0;
 
     /**
      * directly pass the only-one result out.
      * used in e.g. parserls non-ast-createfunc directly pass and parser_expr pass factor-pass/expr-ast.
      */
     ast* readone(lexer* lex) {
-        vector<ast*> ls = read(lex);
+        std::vector<ast*> ls;
+        read(lex, ls);
         assert(ls.size() == 1);
         return ls.at(0);
     }

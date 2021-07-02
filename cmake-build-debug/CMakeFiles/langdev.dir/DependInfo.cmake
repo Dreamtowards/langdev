@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.cpp" "/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/CMakeFiles/langdev.dir/src/lexer/lexer.cpp.o"
   "/Users/dreamtowards/CLionProjects/langdev/src/main.cpp" "/Users/dreamtowards/CLionProjects/langdev/cmake-build-debug/CMakeFiles/langdev.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")

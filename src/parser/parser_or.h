@@ -14,11 +14,12 @@ public:
 
     parser_or(const vector<parser*>& v) : m_options(v) { }
 
-    vector<ast*> read(lexer* lex) override {
+    void read(lexer* lex, std::vector<ast*>& out) override {
         parser* p = choose(lex);
         if (!p)
             throw runtime_error("Bad or. no valid option.");
-        return p->read(lex);
+
+        p->read(lex, out);
     }
 
     bool match(lexer* lex) override {

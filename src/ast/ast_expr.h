@@ -13,12 +13,18 @@ class ast_expr : public ast {
 public:
     ast* m_left;
     ast* m_right;
-    token* m_opr;
+    std::string m_opr;
 
-    ast_expr(ast* l, token* o, ast* r) : m_left(l), m_opr(o), m_right(r) {}
+    ast_expr(ast* l, std::string& o, ast* r) : m_left(l), m_opr(o), m_right(r) {}
 
-    string to_string() override {
-        return "("+m_left->to_string()+" "+m_opr->m_text+" "+m_right->to_string()+")";
+    explicit ast_expr(vector<ast*> ls) :
+        m_left(ls.at(0)),
+        m_opr(dynamic_cast<ast_token*>(ls.at(1))->m_token->m_text),
+        m_right(ls.at(2))
+        {}
+
+    std::string to_string() override {
+        return "("+m_left->to_string()+" "+m_opr+" "+m_right->to_string()+")";
     }
 };
 

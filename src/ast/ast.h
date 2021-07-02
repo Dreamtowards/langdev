@@ -8,10 +8,9 @@
 class ast {
 
 public:
-    virtual string to_string() {
+    virtual std::string to_string() {
         return "base_ast";
     }
-
 };
 
 #endif //LANGDEV_AST_H

@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/langdev.dir/src/lexer/lexer.cpp.o"
   "CMakeFiles/langdev.dir/src/main.cpp.o"
   "langdev"
   "langdev.pdb"

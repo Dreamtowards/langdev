@@ -20,9 +20,7 @@ public:
         return _inst;
     }
 
-    vector<ast*> read(lexer* lex) override {
-        return {};
-    }
+    void read(lexer* lex, std::vector<ast*>& out) override { }
 
     bool match(lexer* lex) override {
         return true;

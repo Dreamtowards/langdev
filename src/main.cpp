@@ -1,14 +1,17 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #include "lexer/lexer.h"
-#include "util/util.h"
 #include "parser/parserls.h"
-#include "parser/parser_expr.h"
+#include "ast/ast_expr.h"
 
-using namespace std;
+#include "util/util.h"
+#include "ast/ast_expr_funccall.h"
+#include "ast/astls.h"
 
 int main() {
+
 
     ifstream fs("../main.g");
     string s = util::to_string(fs);
@@ -16,37 +19,45 @@ int main() {
     auto* lex = new lexer();
     lex->read(s);
 
-    operator_::init_operators();
 
-    auto* p_expr = pass();
+    auto* exprbase = pass();
     {
-        auto* p_literal_number = pass()->c_number();
-        auto* p_literal_string = pass()->c_string();
-        auto* p_variable_reference = pass()->c_name();
-        auto* p_function_call = pass()->c_name()->c_id("(")->c_id(")");
+        auto* literal_number = pass()->number();
+        auto* literal_string = pass()->string();
+        auto* varname = pass()->name();
 
-        auto* p_primary = pass()->c_or(3,
-                                       p_literal_number,
-                                       p_literal_string,
-                                       p_variable_reference);
+        auto* primary = pass()->or_p({
+            literal_number,
+            literal_string,
+            varname});
 
-        auto* p_factor = pass();
-        p_factor->c_or(3,
-                       p_primary,
-                       pass()->c_id("(")->add_component(p_expr)->c_id(")"),
-                       pass()->c_id("-")->add_component(p_factor));
+        auto* expr_zero = pass()->or_p({
+            pass()->id("(")->andp(exprbase)->id(")"),
+            primary
+        });
 
-        p_expr->add_component(new parser_expr(p_factor));
+        auto* fn_arg_ls = struc<astls>()
+                ->op(pass()->andp(exprbase)->repeat(pass()->id(",")->andp(exprbase)));
+
+        auto* expr1 = pass()->andp(expr_zero)->repeat(pass()->or_p({
+            pass()->iden({"."})->name()->composesp<ast_expr>(3),
+            pass()->id("(")->andp(fn_arg_ls)->id(")")->composesp<ast_expr_funccall>(2)
+        }));
+
+        auto* expr4 = pass()->_expr_bi_lr(expr1, {"*", "/"});
+        auto* expr5 = pass()->_expr_bi_lr(expr4, {"+", "-"});
+
+        auto* expr8 = pass()->_expr_bi_lr(expr5, {"=="});
+
+        auto* expr15 = pass();
+        expr15->andp(expr8)->repeat(pass()->iden({"="})->andp(expr15));
+
+
+        exprbase->andp(expr15);
     }
 
-//lex->dbg_print_tokens();
-
-    vector<ast*> rs = p_expr->read(lex);
-    for (ast* ast : rs) {
-        cout << "AST: " << ast->to_string() << endl;
-    }
-
-//    delete lex;
+    ast* ast = exprbase->readone(lex);
+    std::cout << "AST: " << ast->to_string() << std::endl;
 
     return 0;
 }

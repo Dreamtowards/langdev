@@ -10,15 +10,6 @@
 
 #include "parser.h"
 
-using namespace std;
-
-//ast* default_asttoken_createfunc(token* t) {
-//    return new ast_token(t);
-//}
-//const char* default_token_validator(token t) {
-//    return nullptr;
-//}
-
 
 class parser_token : public parser {
 
@@ -26,19 +17,16 @@ public:
     function<ast* (token*)>        createfunc = [](token* t) {return new ast_token(t);};  // nullable. null: ignore ast-result.
     function<const char* (token*)> validator  = [](token* t) {return nullptr;};
 
-    vector<ast*> read(lexer* lexer) override {
+    void read(lexer* lexer, std::vector<ast*>& out) override {
         token* t = lexer->next();
+
         const char* err = validator(t);
-        if (err) {
-            cout << "Bad token: " << err << endl;
-            exit(-1);
-        }
-        if (createfunc == nullptr) {
-            return {};
-        } else {
-            ast *r = createfunc(t);
-            vector<ast *> l(1, r);
-            return l;
+        if (err)
+            throw std::runtime_error(std::string("Bad token: ") + err);
+
+        if (createfunc) {
+            ast* r = createfunc(t);
+            out.push_back(r);
         }
     }
 
