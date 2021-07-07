@@ -8,17 +8,41 @@
 
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
 
-/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr.h
-ast.h
-/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
-ast_token.h
-/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h
-
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_funccall.h
 ast.h
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
 astls.h
 /Users/dreamtowards/CLionProjects/langdev/src/ast/astls.h
+
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operbi.h
+ast.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
+ast_token.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h
+
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_opertricon.h
+vector
+-
+ast.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
+
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operupost.h
+vector
+-
+ast.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
+ast_token.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h
+
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operupre.h
+vector
+-
+string
+-
+ast.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
+ast_token.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h
 
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h
 ast.h
@@ -57,14 +81,20 @@ lexer/lexer.h
 /Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h
 parser/parserls.h
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parserls.h
-ast/ast_expr.h
-/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr.h
+ast/ast_expr_operbi.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operbi.h
 util/util.h
 /Users/dreamtowards/CLionProjects/langdev/src/util/util.h
 ast/ast_expr_funccall.h
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_funccall.h
 ast/astls.h
 /Users/dreamtowards/CLionProjects/langdev/src/ast/astls.h
+ast/ast_expr_operupost.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operupost.h
+ast/ast_expr_opertricon.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_opertricon.h
+ast/ast_expr_operupre.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operupre.h
 
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h
 vector
@@ -107,6 +137,8 @@ vector
 /Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h
 ../ast/ast.h
 /Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
+../ast/ast_expr_operbi.h
+/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operbi.h
 parser.h
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parser.h
 parser_token.h
@@ -119,8 +151,6 @@ parser_repeat.h
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parser_repeat.h
 parser_composer.h
 /Users/dreamtowards/CLionProjects/langdev/src/parser/parser_composer.h
-../ast/ast_expr.h
-/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr.h
 
 /Users/dreamtowards/CLionProjects/langdev/src/util/util.h
 string

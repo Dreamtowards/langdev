@@ -83,10 +83,19 @@
 		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h">
 			<Option target="langdev"/>
 		</Unit>
-		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr.h">
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_funccall.h">
 			<Option target="langdev"/>
 		</Unit>
-		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_funccall.h">
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operbi.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_opertricon.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operupost.h">
+			<Option target="langdev"/>
+		</Unit>
+		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operupre.h">
 			<Option target="langdev"/>
 		</Unit>
 		<Unit filename="/Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h">

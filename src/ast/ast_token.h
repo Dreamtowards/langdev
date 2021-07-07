@@ -13,10 +13,10 @@ class ast_token : public ast {
 public:
     token* m_token;
 
-    ast_token(token* tIn) : m_token(tIn) {};
+    ast_token(token* token) : m_token(token) {};
 
-    string to_string() override {
-        return "'"+m_token->to_string()+"'";
+    std::string to_string() override {
+        return m_token->to_string();
     }
 
 };

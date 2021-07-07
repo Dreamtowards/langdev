@@ -3,8 +3,11 @@
 
 CMakeFiles/langdev.dir/src/main.cpp.o
  /Users/dreamtowards/CLionProjects/langdev/src/ast/ast.h
- /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr.h
  /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_funccall.h
+ /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operbi.h
+ /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_opertricon.h
+ /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operupost.h
+ /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_expr_operupre.h
  /Users/dreamtowards/CLionProjects/langdev/src/ast/ast_token.h
  /Users/dreamtowards/CLionProjects/langdev/src/ast/astls.h
  /Users/dreamtowards/CLionProjects/langdev/src/lexer/lexer.h

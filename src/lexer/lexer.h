@@ -158,13 +158,20 @@ private:
     static inline bool _curris(const string& search, const string& s, int idx) {
         return s.find(search, idx) == idx;
     }
-    static string readBorder(string s, int* idx) {
+
+    static std::string readBorder(std::string s, int* idx) {
         int i = *idx;
         char ch = s.at(i);
-        if (_curris("||",s,i) || _curris("&&",s,i) ||
-            _curris("==",s,i) || _curris("!=",s,i) ||
+        // Bad!
+        if (_curris(">>>",s,i)) {
+            (*idx) += 2;
+            return s.substr(i, 3);
+        }
+        if (_curris("++",s,i) || _curris("--",s,i) ||
+            _curris("&&",s,i) || _curris("||",s,i) ||
+            _curris("<<",s,i) || _curris(">>",s,i) ||
             _curris("<=",s,i) || _curris(">=",s,i) ||
-            _curris("<<",s,i) || _curris(">>",s,i)) {
+            _curris("==",s,i) || _curris("!=",s,i)) {
             (*idx) += 2;
             return s.substr(i, 2);
         } else if (isBorder(ch)) {

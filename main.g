@@ -1,5 +1,5 @@
 
-a.num.k(sth, 8) * 5 + b / 3
+100 + 10 / 2 - 5
 
 class Animal {
 
@@ -39,4 +39,4 @@ class function<R, P...> {
 
     R invoke(P...);
 
-}s
+}

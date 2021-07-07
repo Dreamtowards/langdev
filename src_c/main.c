@@ -10,6 +10,11 @@ struct STRUC {
     int i2;
 };
 
+void call(int i) {
+    int is[i];
+
+}
+
 int main() {
 
     struct STRUC s1 = {1, 2};

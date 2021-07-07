@@ -10,6 +10,7 @@
 
 #include "../lexer/lexer.h"
 #include "../ast/ast.h"
+#include "../ast/ast_expr_operbi.h"
 
 #include "parser.h"
 #include "parser_token.h"
@@ -17,7 +18,6 @@
 #include "parser_lookahead_tag.h"
 #include "parser_repeat.h"
 #include "parser_composer.h"
-#include "../ast/ast_expr.h"
 
 class parserls;
 parserls* pass();
@@ -27,7 +27,7 @@ class parserls : public parser {
 public:
     vector<parser*> m_components;
 
-    bool m_use_lookahead = false;
+    bool m_use_lookahead_until = false;
 
     /**
      *  AST Create function. create ast when parser.read().
@@ -56,7 +56,7 @@ public:
         if (m_components.empty())
             return true;
         // as lookahead-until does not needed, just test the first one.
-        if (!m_use_lookahead)
+        if (!m_use_lookahead_until)
             return m_components.at(0)->match(lex);
 
         // lookahead until
@@ -152,7 +152,7 @@ public:
 
 
     parserls* mark_lookahead() {
-        m_use_lookahead = true;
+        m_use_lookahead_until = true;
         return andp(parser_lookahead_tag::instance());
     }
 
@@ -196,7 +196,7 @@ public:
 
 
     parserls* _expr_bi_lr(parser* factor, std::initializer_list<std::string> oprs) {
-        return andp(factor)->repeat(pass()->iden(oprs)->andp(factor)->composesp<ast_expr>(3));
+        return andp(factor)->repeat(pass()->iden(oprs)->andp(factor)->composesp<ast_expr_operbi>(3));
     }
 
 
