@@ -13,9 +13,9 @@ public:
 
     }
 
-    virtual void* eval(scope* sc) {
-        throw std::runtime_error("Failed eval: unsupported");
-    }
+//    virtual void* eval(scope* sc) {
+//        throw std::runtime_error("Failed eval: unsupported");
+//    }
 };
 
 #endif //LANGDEV_AST_H

@@ -13,11 +13,11 @@
 #include "ast/ast_expr_opertricon.h"
 #include "ast/ast_expr_operupre.h"
 
+
 int main() {
 
-
-    ifstream fs("../main.g");
-    string s = util::to_string(fs);
+    std::ifstream fs("../main.g");
+    std::string s = util::to_string(fs);
 
     auto* lex = new lexer();
     lex->read(s);
@@ -92,7 +92,7 @@ int main() {
         std::cout << std::endl;
 
 
-        std::cout << "EVAL: " << ast->eval() << std::endl;
+//        std::cout << "EVAL: " << ast->eval() << std::endl;
 
     } catch (std::runtime_error& err) {
         std::cerr << "ERR: " << err.what() << std::endl;

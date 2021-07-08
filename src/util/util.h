@@ -8,31 +8,30 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
-
 class util {
 
 public:
-    static string to_string(istream& in) {
-        stringstream ss;
+    static std::string to_string(std::istream& in) {
+        std::stringstream ss;
         ss << in.rdbuf();
         return ss.str();
     }
 
-    template<typename T>
-    static vector<T> aslist(int num, ...) {
-        va_list va_ls;
-        va_start(va_ls, num);
-
-        vector<T> v;
-        for (int i = 0;i < num;i++) {
-            v.push_back(va_arg(va_ls, T));
-        }
-
-        va_end(va_ls);
-
-        return v;
-    }
+//    Deprecated.
+//    template<typename T>
+//    static std::vector<T> aslist(int num, ...) {
+//        va_list va_ls;
+//        va_start(va_ls, num);
+//
+//        std::vector<T> v;
+//        for (int i = 0;i < num;i++) {
+//            v.push_back(va_arg(va_ls, T));
+//        }
+//
+//        va_end(va_ls);
+//
+//        return v;
+//    }
 };
 
 

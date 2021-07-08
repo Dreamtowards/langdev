@@ -10,14 +10,14 @@
 class parser_or : public parser {
 
 public:
-    vector<parser*> m_options;
+    std::vector<parser*> m_options;
 
-    parser_or(const vector<parser*>& v) : m_options(v) { }
+    explicit parser_or(const std::vector<parser*>& v) : m_options(v) { }
 
     void read(lexer* lex, std::vector<ast*>& out) override {
         parser* p = choose(lex);
         if (!p)
-            throw runtime_error("Bad or. no valid option.");
+            throw std::runtime_error("Bad or. no valid option.");
 
         p->read(lex, out);
     }

@@ -10,7 +10,7 @@
 class parser_composer : public parser {
 
 public:
-    function<void(std::vector<ast*>&)> m_composer_func;
+    std::function<void(std::vector<ast*>&)> m_composer_func;
 
     void read(lexer* lex, std::vector<ast*>& out) override {
 

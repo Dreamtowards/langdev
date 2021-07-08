@@ -1,7 +1,7 @@
 
 # 1. Directions
 
-## 1.1 Consistence. i.e. "Feel-Similar"~~~~~~~~~~~~~~~~
+## 1.1 Consistence. i.e. "Feel-Similar"
 
 O.O.P. Objects
 

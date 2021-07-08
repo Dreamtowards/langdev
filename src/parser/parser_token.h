@@ -14,8 +14,8 @@
 class parser_token : public parser {
 
 public:
-    function<ast* (token*)>        createfunc = [](token* t) {return new ast_token(t);};  // nullable. null: ignore ast-result.
-    function<const char* (token*)> validator  = [](token* t) {return nullptr;};
+    std::function<ast* (token*)>        createfunc = [](token* t) {return new ast_token(t);};  // nullable. null: ignore ast-result.
+    std::function<const char* (token*)> validator  = [](token* t) {return nullptr;};
 
     void read(lexer* lexer, std::vector<ast*>& out) override {
         token* t = lexer->next();

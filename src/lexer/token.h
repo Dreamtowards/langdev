@@ -7,7 +7,6 @@
 #ifndef LANGDEV_TOKEN_H
 #define LANGDEV_TOKEN_H
 
-using namespace std;
 
 class token {
 
@@ -17,11 +16,11 @@ public:
     static const int TYPE_NUMBER = 3;  // INT FLOAT   HEX OCT BIN.?
     static const int TYPE_STRING = 4;  // STRING CHAR.?
 
-    string m_text;
+    std::string m_text;
     int m_type;
 
 public:
-    token(string textIn, int typeIn): m_text(textIn), m_type(typeIn) {};
+    token(std::string textIn, int typeIn): m_text(textIn), m_type(typeIn) {};
 
     bool isName() const {
         return m_type == TYPE_NAME;
@@ -41,7 +40,7 @@ public:
 
 
 
-    string to_string() {
+    std::string to_string() {
         return m_text;
     }
 

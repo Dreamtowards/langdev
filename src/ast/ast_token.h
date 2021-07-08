@@ -19,6 +19,9 @@ public:
         return m_token->to_string();
     }
 
+    static std::string cast_text(ast* a) {
+        return dynamic_cast<ast_token*>(a)->m_token->m_text;
+    }
 };
 
 #endif //LANGDEV_AST_TOKEN_H

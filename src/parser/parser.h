@@ -28,7 +28,7 @@ public:
     }
 
     /**
-     * After call of match(), the lexer-index should as same as before the call.
+     * after call of match(), the lexer-index should as same as before the call.
      */
     virtual bool match(lexer* lex) = 0;
 

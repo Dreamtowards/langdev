@@ -8,19 +8,16 @@
 #include <string>
 #include <vector>
 #include <iostream>
-
 #include <sstream>
 
 #include "token.h"
-
-using namespace std;
 
 
 class lexer {
 
 public:
     int m_index;
-    vector<token*> m_tokens;
+    std::vector<token*> m_tokens;
 
     ~lexer() {
         std::cout << "Deconstruct lexer" << std::endl;
@@ -29,28 +26,28 @@ public:
     void read(const std::string& s) {
         int len = s.length();
         int idx = 0;
-        while (skipBlanks(s, &idx) < len) {
+        while (skip_blanks(s, idx) < len) {
             char ch = s.at(idx);
-            string text;
+            std::string text;
             int type;
-            if (_curris("//",s,idx)) {         // COMMENT line
+            if (_curris("//",s,idx)) {          // COMMENT line
                 int end = s.find('\n', idx);
                 idx = end == -1 ? len : end;
                 continue;
-            } else if (_curris("/*",s,idx)) {  // COMMENT block
+            } else if (_curris("/*",s,idx)) {   // COMMENT block
                 idx = s.find("*/",idx) +2;
                 continue;
-            } else if (isNumber(ch)) {                // NUMBER
-                text = readNumber(s, &idx);
+            } else if (is_number(ch)) {                // NUMBER
+                text = read_number(s, idx);
                 type = token::TYPE_NUMBER;
-            } else if (ch == '"' || ch == '\'') {     // STRING
-                text = readQuote(s, &idx);
+            } else if (ch == '"' || ch == '\'') {      // STRING
+                text = read_quote(s, idx);
                 type = token::TYPE_STRING;
-            } else if (isName(ch, true)) {      // NAME
-                text = readName(s, &idx);
+            } else if (is_name_char(ch, true)) {   // NAME
+                text = read_name(s, idx);
                 type = token::TYPE_NAME;
-            } else if (isBorder(ch)) {               // BORDER
-                text = readBorder(s, &idx);
+            } else if (is_border_char(ch)) {           // BORDER
+                text = read_border(s, idx);
                 type = token::TYPE_BORDER;
             } else {
                 throw std::runtime_error("Unsupported token format.");
@@ -72,99 +69,94 @@ public:
 
     void dbg_print_tokens() {
         for (const token* t : m_tokens) {
-            cout <<"TOKEN["<<t->m_type<<"]: "<< t->m_text << endl;
+            std::cout <<"TOKEN["<<t->m_type<<"]: "<< t->m_text << std::endl;
         }
     }
 
 private:
 
-
-    static int skipBlanks(string s, int* idx) {
-        while (*idx < s.length()) {
-            if (s.at(*idx) > ' ')
+    static int skip_blanks(const std::string& s, int& idx) {
+        while (idx < s.length()) {
+            if (s.at(idx) > ' ')
                 break;
-            (*idx)++;
+            (idx)++;
         }
-        return *idx;
+        return idx;
     }
 
-    static bool isNumber(char ch) {
+    static bool is_number(char ch) {
         return ch >= '0' && ch <= '9';
     }
-    static string readNumber(string s, int* idx) {
+    static std::string read_number(const std::string& s, int& idx) {
         bool haspoint = false;
-        int start = *idx;
-        while (*idx < s.length()) {
-            char ch = s.at(*idx);
+        int start = idx;
+        while (idx < s.length()) {
+            char ch = s.at(idx);
             if (ch == '.' && !haspoint) {
                 haspoint = true;
-            } else if (!isNumber(ch)) {
+            } else if (!is_number(ch)) {
                 break;
             }
-            (*idx)++;
+            idx++;
         }
-        return s.substr(start, *idx-start);
+        return s.substr(start, idx-start);
     }
 
-    static string readQuote(string s, int* idx) {
-        char quote = s.at(*idx);
-        (*idx)++;
+    static std::string read_quote(const std::string& s, int& idx) {
+        char quote = s.at(idx);
+        idx++;
         std::stringstream ss;
-        while (*idx < s.length()) {
-            char ch = s.at(*idx);
+        while (idx < s.length()) {
+            char ch = s.at(idx);
             if (ch == quote) {
-                (*idx)++;
+                idx++;
                 break;
             } else if (ch == '\\') {
-                char ch1 = s.at(*idx+1);
+                char ch1 = s.at(idx+1);
                 if (ch1 == '\\')      ss << '\\';
                 else if (ch1 == '\'') ss << '\'';
                 else if (ch1 == '"')  ss << '"';
                 else if (ch1 == 'n')  ss << '\n';
-                (*idx) += 2;
+                idx += 2;
             } else {
                 ss << ch;
-                (*idx)++;
+                idx++;
             }
         }
         return ss.str();
     }
 
-    static bool isName(char ch, bool first) {
-        if (!first && isNumber(ch))
+    static bool is_name_char(char ch, bool first) {
+        if (!first && is_number(ch))
             return true;
         return (ch >= 'a' && ch <= 'z') ||
                (ch >= 'A' && ch <= 'Z') ||
                ch == '_';
     }
-    static string readName(string s, int* idx) {
-        int start = *idx;
-        while (*idx < s.length()) {
-            char ch = s.at(*idx);
-            if (!isName(ch, *idx == start)) {
+    static std::string read_name(const std::string& s, int& idx) {
+        int start = idx;
+        while (idx < s.length()) {
+            char ch = s.at(idx);
+            if (!is_name_char(ch, idx == start)) {
                 break;
             }
-            (*idx)++;
+            idx++;
         }
-        return s.substr(start, *idx-start);
+        return s.substr(start, idx-start);
     }
 
-    static bool isBorder(char ch) {
+    static bool is_border_char(char ch) {
         return (ch >= '!' && ch <= '/') ||
                (ch >= ':' && ch <= '@') ||
                (ch >= '[' && ch <= '`') ||
                (ch >= '(' && ch <= '~');
     }
-    static inline bool _curris(const string& search, const string& s, int idx) {
-        return s.find(search, idx) == idx;
-    }
-
-    static std::string readBorder(std::string s, int* idx) {
-        int i = *idx;
+    static std::string read_border(const std::string& s, int& idx) {
+        int i = idx;
         char ch = s.at(i);
         // Bad!
         if (_curris(">>>",s,i)) {
-            (*idx) += 2;
+            idx += 3;
             return s.substr(i, 3);
         }
         if (_curris("++",s,i) || _curris("--",s,i) ||
@@ -172,16 +164,19 @@ private:
             _curris("<<",s,i) || _curris(">>",s,i) ||
             _curris("<=",s,i) || _curris(">=",s,i) ||
             _curris("==",s,i) || _curris("!=",s,i)) {
-            (*idx) += 2;
+            idx += 2;
             return s.substr(i, 2);
-        } else if (isBorder(ch)) {
-            (*idx)++;
+        } else if (is_border_char(ch)) {
+            idx++;
             return s.substr(i, 1);
         } else {
-            throw_with_nested("illegal border");
+            throw std::runtime_error("illegal border");
         }
     }
 
+    static inline bool _curris(const std::string& search, const std::string& s, int idx) {
+        return s.find(search, idx) == idx;
+    }
 };
 
 

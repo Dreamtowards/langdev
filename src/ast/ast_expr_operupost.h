@@ -17,7 +17,9 @@ public:
     ast* m_expr;
     std::string m_oper;
 
-    explicit ast_expr_operupost(const std::vector<ast*>& ls) : m_expr(ls.at(0)), m_oper(static_cast<ast_token*>(ls.at(1))->m_token->m_text) {}
+    explicit ast_expr_operupost(const std::vector<ast*>& ls) :
+        m_expr(ls.at(0)),
+        m_oper(ast_token::cast_text(ls.at(1))) {}
 
     std::string to_string() override {
         return "("+m_expr->to_string()+m_oper+")";

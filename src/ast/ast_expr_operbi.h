@@ -13,18 +13,18 @@ class ast_expr_operbi : public ast {
 public:
     ast* m_left;
     ast* m_right;
-    std::string m_opr;
+    std::string m_oper;
 
-    ast_expr_operbi(ast* l, std::string& o, ast* r) : m_left(l), m_opr(o), m_right(r) {}
+    ast_expr_operbi(ast* l, std::string& o, ast* r) : m_left(l), m_oper(o), m_right(r) {}
 
-    explicit ast_expr_operbi(const vector<ast*>& ls) :
+    explicit ast_expr_operbi(const std::vector<ast*>& ls) :
         m_left(ls.at(0)),
-        m_opr(dynamic_cast<ast_token*>(ls.at(1))->m_token->m_text),
+        m_oper(ast_token::cast_text(ls.at(1))),
         m_right(ls.at(2))
         {}
 
     std::string to_string() override {
-        return "("+m_left->to_string()+" "+m_opr+" "+m_right->to_string()+")";
+        return "("+m_left->to_string()+" "+m_oper+" "+m_right->to_string()+")";
     }
 };
 

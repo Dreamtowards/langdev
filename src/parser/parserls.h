@@ -25,7 +25,7 @@ parserls* pass();
 class parserls : public parser {
 
 public:
-    vector<parser*> m_components;
+    std::vector<parser*> m_components;
 
     bool m_use_lookahead_until = false;
 
@@ -33,7 +33,7 @@ public:
      *  AST Create function. create ast when parser.read().
      *  null: pass through reads.  nonnull: create one ast from reads.
      */
-    function<ast*(vector<ast*>)> m_createfunc = nullptr;
+    std::function<ast*(std::vector<ast*>)> m_createfunc = nullptr;
 
     void read(lexer* lexer, std::vector<ast*>& out) override {
         // organize struct or simply pass.
@@ -123,7 +123,7 @@ public:
         p->createfunc = nullptr;  // Do not needs ast-result.
         return andp(p);
     }
-    parserls* iden(const vector<std::string>& ids) {
+    parserls* iden(const std::vector<std::string>& ids) {
         auto* p = new parser_token();
         p->validator = [ids](token* t) -> const char* {
             if (!t->isIdentifier())
@@ -170,7 +170,7 @@ public:
 
 
 
-    parserls* composer(const function<void(std::vector<ast*>&)>& compfunc) {
+    parserls* composer(const std::function<void(std::vector<ast*>&)>& compfunc) {
         auto* p = new parser_composer();
 
         p->m_composer_func = compfunc;
@@ -181,7 +181,7 @@ public:
     template<typename T>
     parserls* composesp(int n) {
         return composer([n](std::vector<ast*>& ls){
-            vector<ast*> l;
+            std::vector<ast*> l;
             l.reserve(n);
 
             // move.
@@ -212,7 +212,7 @@ parserls* pass() {
 template<typename T>
 parserls* struc() {
     auto* p = new parserls();
-    p->m_createfunc = [](const vector<ast*>& ls) -> ast* {
+    p->m_createfunc = [](const std::vector<ast*>& ls) -> ast* {
         return new T(ls);
     };
     return p;
